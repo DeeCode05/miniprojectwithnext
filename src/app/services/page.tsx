@@ -42,7 +42,7 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="text-center py-16 bg-gradient-to-r from-orange-100 to-white">
+      <section className="text-center py-16 bg-gradient-to-r from-[#a8c6d8]  to-white">
         <h1 className="text-4xl font-bold text-gray-800">Our Services</h1>
         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
           Choose from trusted professionals near you. Fast, reliable, and
@@ -65,7 +65,7 @@ export default function ServicesPage() {
               <div className="flex justify-center">{service.icon}</div>
               <h2 className="text-xl font-semibold mt-6">{service.title}</h2>
               <p className="text-gray-600 mt-3">{service.description}</p>
-              <button className="mt-6 bg-orange-500 text-white px-5 py-2 rounded-xl hover:bg-orange-600 transition">
+              <button className="mt-6 bg-[#000000] text-white px-5 py-2 rounded-xl hover:bg-[#e61717] transition">
                 Book Now
               </button>
             </motion.div>
