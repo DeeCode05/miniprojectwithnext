@@ -1,7 +1,8 @@
+import HowItWorks from "./HowItWorks";
 
 export default function About() {
   return (
-    <div className="min-h-100vh bg-[#ffffff] text-[#1A1A1A]">
+    <div className="min-h-100vh bg-[#e5ebeb] text-[#1A1A1A]">
       <section className="text-center py-5">
         <h1 className="text-4xl font-bold mb-4">About UrbanSetGo</h1>
         <p className="text-lg text-[#6B7280] max-w-5xl mx-auto">
@@ -11,43 +12,59 @@ export default function About() {
         </p>
       </section>
 
-      <section className="grid md:grid-cols-2 gap-8 items-center px-8 md:px-16 py-8">
-        <div>
+      <section className="grid md:grid-cols-2 gap-8 items-center md:px-5 shadow-lg">
+        <div className=" bg-gradient-to-r from-[#25485e]  to-blue-300 scale-80 grid sm:grid-cols-2 grid-rows-2">
           <img
             src="/image/about.jpg"
             alt=""
-            className="rounded-2xl w-full max-w-sm shadow-lg"
+            className="p-2 w-full h-full object-cover max-w-sm shadow-lg col-span-1 row-span-2 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-2xl"
+          />
+          <img
+            src="/image/about.jpg"
+            alt=""
+            className="w-full h-48 object-cover shadow p-2 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-2xl"
+          />
+          <img
+            src="/image/about.jpg"
+            alt=""
+            className="p-2 w-full h-full object-cover max-w-sm shadow-lg col-span-1 row-span-2 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-2xl"
+          />
+          <img
+            src="/image/about.jpg"
+            alt=""
+            className="p-2 w-full h-48 object-cover shadow transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-2xl"
           />
         </div>
 
-        <div className="text-2xl font-semibold mb-4 text-[#2B6CB0]">
-          <h2 className="text-[#2b406c] mb-2 font-sans">Why Choose Us?</h2>
+        <div className="text-2xl font-semibold mb- text-[#2b6cb0]">
+          <h2 className="text-[#2b406c] mb-4 font-bold text-3xl">Why Choose Us?</h2>
           <p className="text-[#6B7280] mb-4 text-2xl">
             We're more than just a service booking platform.Our goal is to bring
             convenience, trust and quality into your everyday life.
           </p>
 
-          <ul className="space-y-3">
+          <ul className="space-y-1">
             <li className="flex items-center">
-              <span className="text-[#16A34A] font-bold mr-2">
+              <span className="text-[#e61717] font-bold mr-2">
                 • Verified Professionals
               </span>
             </li>
             <li className="flex items-center">
-              <span className="text-[#16A34A] font-bold mr-2">
+              <span className="text-[#e61717] font-bold mr-2">
                 • Affordable and transparent pricing
               </span>
             </li>
             <li className="flex items-center">
-              <span className="text-[#16A34A] font-bold mr-2">
+              <span className="text-[#e61717] font-bold mr-2">
                 • Quick and reliable services
               </span>
             </li>
           </ul>
         </div>
       </section>
+      <HowItWorks />
 
-      <section className="max-w-6xl mx-auto">
+      {/* <section className="max-w-6xl mx-auto">
         <div className="text-center py-5">
           <h2 className="text-4xl font-bold mb-4">Our Mission</h2>
           <p className="text-lg text-[#6B7280] max-w-5xl mx-auto">
@@ -81,16 +98,8 @@ export default function About() {
               </li>
             </ul>
           </div>
-
-          <div>
-            <img
-              src="/image/about.jpg"
-              alt=""
-              className=" justify-start h-auto rounded-2xl w-full max-w-sm shadow-lg"
-            />
-          </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

@@ -1,8 +1,10 @@
 import Link from "next/link";
+import typewriter from "@/components/typewriter";
+
 
 export default function Home() {
   return (
-    <main className=" bg-[#ffffff] text-center py-5 px-6">
+    <main className=" bg-[#e5ebeb] text-center py-5 px-6">
       <section className="bg-[#a8c6d8] text-center py-10 px-6">
         <h1 className="text-5xl font-bold text-[#F5F5EF]">
           Welcome to <span className=" text-[#1f2839]">UrbanSetGo </span>
