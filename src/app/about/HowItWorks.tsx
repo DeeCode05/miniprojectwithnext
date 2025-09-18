@@ -23,13 +23,11 @@ const steps = [
   },
 ];
 
-// Variants for card animation
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0 },
 };
 
-// Variants for line animation
 const lineVariants = {
   hidden: { scaleX: 0, opacity: 0 },
   visible: { scaleX: 1, opacity: 1 },
@@ -38,25 +36,23 @@ const lineVariants = {
 export default function HowItWorks() {
   const [visibleIndex, setVisibleIndex] = useState(-1);
 
-  // Auto play animation: reveal one card every 1s
   useEffect(() => {
     let i = 0;
     const interval = setInterval(() => {
       setVisibleIndex(i);
-      i = (i + 1) % (steps.length + 1); // restart after last
+      i = (i + 1) % (steps.length + 1); 
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="py-10 bg-[#e5ebeb] overflow-x-auto">
-      <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
+    <section className="py-10 bg-[#f5f6f2] overflow-x-auto">
+      <h2 className="text-4xl font-bold text-center mb-12">How It Works</h2>
 
       <div className="flex items-center justify-start gap-6 max-w-7xl mx-auto px-4 flex-nowrap">
         {steps.map((step, index) => (
           <React.Fragment key={index}>
-            {/* Step Card */}
             <motion.div
               variants={cardVariants}
               initial="hidden"
@@ -70,7 +66,6 @@ export default function HowItWorks() {
               <p className="text-gray-600 text-sm">{step.description}</p>
             </motion.div>
 
-            {/* Animated Red dotted connector */}
             {index < steps.length - 1 && (
               <motion.div
                 className="w-12 border-t-4 border-dotted border-[#e61717] origin-left"

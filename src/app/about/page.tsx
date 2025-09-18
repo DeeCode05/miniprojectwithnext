@@ -1,8 +1,12 @@
+"use client";
+
 import HowItWorks from "./HowItWorks";
+import MissionSection from "./MissionSection";
+import TypewriterComponent from "@/components/typewriter";
 
 export default function About() {
   return (
-    <div className="min-h-100vh bg-[#e5ebeb] text-[#1A1A1A]">
+    <div className="min-h-100vh bg-[#f5f6f2] text-[#1A1A1A]">
       <section className="text-center py-5">
         <h1 className="text-4xl font-bold mb-4">About UrbanSetGo</h1>
         <p className="text-lg text-[#6B7280] max-w-5xl mx-auto">
@@ -13,55 +17,69 @@ export default function About() {
       </section>
 
       <section className="grid md:grid-cols-2 gap-8 items-center md:px-5 shadow-lg">
-        <div className=" bg-gradient-to-r from-[#25485e]  to-blue-300 scale-80 grid sm:grid-cols-2 grid-rows-2">
+        <div className="  scale-80 grid sm:grid-cols-2 grid-rows-2 rounded-4xl">
           <img
-            src="/image/about.jpg"
+            src="/image/abtplumber.jpg"
             alt=""
-            className="p-2 w-full h-full object-cover max-w-sm shadow-lg col-span-1 row-span-2 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-2xl"
+            className="p-0.5 rounded-4xl w-full h-full object-cover max-w-sm shadow-lg col-span-1 row-span-2 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-2xl"
           />
           <img
-            src="/image/about.jpg"
+            src="/image/abtelec.jpg"
             alt=""
-            className="w-full h-48 object-cover shadow p-2 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-2xl"
+            className="p-0.5 rounded-4xl w-full h-48 object-cover shadow transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-2xl"
           />
           <img
-            src="/image/about.jpg"
+            src="/image/abtdance.jpg"
             alt=""
-            className="p-2 w-full h-full object-cover max-w-sm shadow-lg col-span-1 row-span-2 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-2xl"
+            className="p-0.5 rounded-4xl w-full h-full object-cover max-w-sm shadow-lg col-span-1 row-span-2 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-2xl"
           />
           <img
-            src="/image/about.jpg"
+            src="/image/abtclean.jpg"
             alt=""
-            className="p-2 w-full h-48 object-cover shadow transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-2xl"
+            className="p-0.5 rounded-4xl w-full h-48 object-cover shadow transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-2xl"
           />
         </div>
 
         <div className="text-2xl font-semibold mb- text-[#2b6cb0]">
-          <h2 className="text-[#2b406c] mb-4 font-bold text-3xl">Why Choose Us?</h2>
-          <p className="text-[#6B7280] mb-4 text-2xl">
+          <div className="text-[#2b406c] mb-4 font-bold text-3xl">
+            <TypewriterComponent />
+          </div>
+          <p className="text-[#6B7280] mb-4">
             We're more than just a service booking platform.Our goal is to bring
             convenience, trust and quality into your everyday life.
           </p>
 
           <ul className="space-y-1">
             <li className="flex items-center">
-              <span className="text-[#e61717] font-bold mr-2">
+              <span className="text-[#e61717] mr-2">
                 • Verified Professionals
               </span>
             </li>
             <li className="flex items-center">
-              <span className="text-[#e61717] font-bold mr-2">
+              <span className="text-[#e61717] mr-2">
                 • Affordable and transparent pricing
               </span>
             </li>
             <li className="flex items-center">
-              <span className="text-[#e61717] font-bold mr-2">
+              <span className="text-[#e61717] mr-2">
                 • Quick and reliable services
               </span>
             </li>
           </ul>
         </div>
       </section>
+
+      <section className="py-5 bg-[#f5f6f2] overflow-x-auto">
+        <h2 className="text-4xl font-bold text-center mb-5">Our Mission</h2>
+        <p className="text-lg text-[#6B7280] max-w-5xl mx-auto">
+          Your time matters. That’s why UrbanSetGo brings trusted services to
+          your fingertips — fast bookings, live tracking, and hassle-free
+          results. Choose a service, book in seconds, track with ease, and relax
+          once the job is done.
+        </p>
+      </section>
+      <MissionSection />
+
       <HowItWorks />
 
       {/* <section className="max-w-6xl mx-auto">
