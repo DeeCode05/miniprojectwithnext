@@ -19,9 +19,9 @@ export default function Home() {
             </button>
           </Link>
 
-          <Link href="/about">
+          <Link href="/registration">
             <button className="border-2 border-[#e61717] font-bold text-white px-6 py-3 rounded-lg hover:bg-[#e61717] hover:text-white transition">
-              Learn More
+              Register as a Professional
             </button>
           </Link>
         </div>

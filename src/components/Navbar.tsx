@@ -9,7 +9,7 @@ export default function Navbar() {
           { name: "Home", href: "/" },
           { name: "About", href: "/about" },
           { name: "Services", href: "/services" },
-          { name: "Contact", href: "/contact" },
+          { name: "Login", href: "/login" },
         ].map((item) => (
           <li key={item.name} className="relative group">
             <Link
