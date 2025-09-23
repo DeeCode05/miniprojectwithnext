@@ -8,7 +8,6 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { username, email, password } = body;
 
-    // Basic validation
     if (!username || !email || !password) {
       return NextResponse.json(
         { message: "All fields are required" },
@@ -16,11 +15,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    console.log("Registering user:", { username, email });
+    console.log("Signing In user:", { username, email });
 
     await dbConnect();
 
-    // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return NextResponse.json(
@@ -29,10 +27,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create the new user
     const newUser = new User({
       username,
       email,
@@ -40,6 +36,7 @@ export async function POST(req: NextRequest) {
     });
 
     await newUser.save();
+    console.log("User registered successfully");
     return NextResponse.json(
       { message: "User created successfully" },
       { status: 201 }

@@ -3,26 +3,37 @@ import mongoose from "mongoose";
 const MONGODB_URI = process.env.MONGODB_URI as string;
 
 if (!MONGODB_URI) {
-  throw new Error("Please define the MONGODB_URI environment variable");
+  throw new Error(
+    "Please define the MONGODB_URI environment variable in .env.local"
+  );
 }
 
-// Add connection string validation
-if (!MONGODB_URI.startsWith('mongodb://') && !MONGODB_URI.startsWith('mongodb+srv://')) {
-  throw new Error('Invalid MongoDB connection string. Must start with "mongodb://" or "mongodb+srv://"');
+// This will cache the connection across hot reloads in Next.js
+let cached = (global as any).mongoose;
+
+if (!cached) {
+  cached = (global as any).mongoose = { conn: null, promise: null };
 }
 
-async function dbConnect(): Promise<typeof mongoose> {
-  try {
-    const connection = await mongoose.connect(MONGODB_URI, {
-      dbName: "urbanSetGo",
-      bufferCommands: false,
-    });
-    console.log("MongoDB connected successfully");
-    return connection;
-  } catch (error) {
-    console.error("MongoDB connection error:", error);
-    throw error;
+async function dbConnect() {
+  if (cached.conn) {
+    return cached.conn;
   }
+
+  if (!cached.promise) {
+    cached.promise = mongoose
+      .connect(MONGODB_URI, {
+        bufferCommands: false,
+        dbName: "urbanSetGo",
+      })
+      .then((mongoose) => {
+        console.log("MongoDB connected successfully");
+        return mongoose;
+      });
+  }
+
+  cached.conn = await cached.promise;
+  return cached.conn;
 }
 
 export default dbConnect;
