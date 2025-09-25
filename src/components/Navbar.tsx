@@ -1,16 +1,24 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const navItems = [
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Services", href: "/services" },
+    { name: "Login", href: "/login" },
+  ];
+
   return (
-    <nav className="flex justify-between items-center px-6 py-4 bg-[#262626] text-white">
+    <nav className="flex justify-between items-center px-6 py-4 bg-[#262626] text-white relative">
       <div className="text-2xl font-bold">UrbanSetGo</div>
-      <ul className="flex space-x-6">
-        {[
-          { name: "Home", href: "/" },
-          { name: "About", href: "/about" },
-          { name: "Services", href: "/services" },
-          { name: "Login", href: "/login" },
-        ].map((item) => (
+
+      <ul className="hidden md:flex space-x-6">
+        {navItems.map((item) => (
           <li key={item.name} className="relative group">
             <Link
               href={item.href}
@@ -26,6 +34,34 @@ export default function Navbar() {
           </li>
         ))}
       </ul>
+
+      <button
+        className="block md:hidden text-2xl"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {isOpen ? "✖" : "☰"}
+      </button>
+
+      {isOpen && (
+        <ul className="absolute top-full left-0 w-full bg-[#1e1e1e] flex flex-col items-center space-y-4 py-4 md:hidden">
+          {navItems.map((item) => (
+            <li key={item.name} className="relative group">
+              <Link
+                href={item.href}
+                className="inline-block relative pb-1 text-white"
+                onClick={() => setIsOpen(false)} 
+              >
+                {item.name}
+                <span
+                  className="absolute bottom-0 h-[2px] w-0 left-1/2 bg-[#e61717] 
+                             transition-all duration-300 ease-in-out 
+                             group-hover:w-full group-hover:left-0"
+                ></span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </nav>
   );
 }

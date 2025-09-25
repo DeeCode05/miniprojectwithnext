@@ -42,7 +42,6 @@ const RegisterProfessional = () => {
   const validateForm = () => {
     const validationErrors: string[] = [];
 
-    // Required fields
     if (!formData.fullName.trim())
       validationErrors.push("Full Name is required.");
     if (!formData.email.trim()) validationErrors.push("Email is required.");
@@ -60,12 +59,10 @@ const RegisterProfessional = () => {
       validationErrors.push("Experience is required.");
     if (!formData.idProof) validationErrors.push("ID Proof is required.");
 
-    // Password match
     if (formData.password !== formData.confirmPassword) {
       validationErrors.push("Passwords do not match.");
     }
 
-    // Phone validation (Indian format example)
     const phoneRegex = /^[6-9]\d{9}$/;
     if (!phoneRegex.test(formData.phone)) {
       validationErrors.push("Invalid phone number format.");
@@ -80,7 +77,6 @@ const RegisterProfessional = () => {
     if (validateForm()) {
       console.log("Form data ready for backend:", formData);
       alert("Registration successful! (Check console for data)");
-      // Send to backend API
     } else {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -104,7 +100,6 @@ const RegisterProfessional = () => {
           Fill in all details accurately for verification
         </p>
 
-        {/* Error Messages */}
         {errors.length > 0 && (
           <div className="bg-red-100 text-[#e61717] p-3 rounded-lg space-y-1">
             <ul>
@@ -115,7 +110,6 @@ const RegisterProfessional = () => {
           </div>
         )}
 
-        {/* Personal Details */}
         <div className="grid md:grid-cols-2 gap-4">
           <input
             type="text"
@@ -159,7 +153,6 @@ const RegisterProfessional = () => {
           />
         </div>
 
-        {/* Address Details */}
         <div className="grid md:grid-cols-2 gap-4">
           <input
             type="text"
@@ -195,7 +188,6 @@ const RegisterProfessional = () => {
           />
         </div>
 
-        {/* Professional Details */}
         <div className="grid md:grid-cols-2 gap-4">
           <input
             type="text"
@@ -215,7 +207,6 @@ const RegisterProfessional = () => {
           />
         </div>
 
-        {/* File Uploads */}
         <div className="grid md:grid-cols-2 gap-4">
           <label className="flex flex-col p-3 border rounded-lg cursor-pointer hover:bg-[#a8c6d8] transition">
             Upload ID Proof *
@@ -243,7 +234,6 @@ const RegisterProfessional = () => {
           </label>
         </div>
 
-        {/* Additional Description */}
         <textarea
           name="description"
           placeholder="Brief description about yourself"
@@ -252,7 +242,6 @@ const RegisterProfessional = () => {
           onChange={handleChange}
         />
 
-        {/* Preview Toggle */}
         <button
           type="button"
           onClick={() => setShowPreview(!showPreview)}
@@ -263,7 +252,6 @@ const RegisterProfessional = () => {
             : "Show Preview & Verification Checklist"}
         </button>
 
-        {/* Preview & Verification Checklist */}
         {showPreview && (
           <div className="mt-6 p-4 border rounded-lg bg-gray-50 space-y-2">
             <h2 className="text-xl font-bold text-gray-700 mb-2">

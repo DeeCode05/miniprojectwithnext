@@ -8,7 +8,6 @@ if (!MONGODB_URI) {
   );
 }
 
-// This will cache the connection across hot reloads in Next.js
 let cached = (global as any).mongoose;
 
 if (!cached) {
