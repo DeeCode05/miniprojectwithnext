@@ -4,11 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 
 export default function SignupPage() {
+  type Role = "user" | "worker";
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [role, setRole] = useState<Role>("user");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,29 +28,27 @@ export default function SignupPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/auth/registration", {
+      const res = await fetch("/api/auth/sign-up", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ username, email, password, role }),
       });
 
       const contentType = res.headers.get("content-type");
 
       if (res.ok) {
         const data = await res.json();
-        alert(data.message); // "User created successfully"
-        // Optional: redirect to login page
+        alert(data.message);
         window.location.href = "/login";
       } else {
         if (contentType && contentType.includes("application/json")) {
           try {
             const errorData = await res.json();
 
-            alert(errorData.message || "An error occurred"); // e.g., "User already exists"
+            alert(errorData.message || "An error occurred");
           } catch (e) {
-            // If the response is not JSON, read it as text
             const errorText = await res.text();
             console.error("Error Text:", errorText);
             alert("An unexpected error occurred. Please check the console.");
@@ -109,6 +109,15 @@ export default function SignupPage() {
               required
               className="w-full p-3 rounded-lg border border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e61717] bg-white/40 text-black placeholder-gray-800"
             />
+
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value as Role)}
+              className="w-full p-3 rounded-lg border border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e61717] bg-white/40 text-black"
+            >
+              <option value="user">User</option>
+              <option value="worker">Worker</option>
+            </select>
 
             <input
               type="password"

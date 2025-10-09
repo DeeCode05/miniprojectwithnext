@@ -3,14 +3,45 @@
 import { useState } from "react";
 import Link from "next/link";
 
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login Data:", { username, password });
-    alert(`Logging in with Username: ${username}`);
+
+    if (!username || !password) {
+      setError("Please provide both email/username and password.");
+      return;
+    }
+
+    try {
+      const res = await signIn("credentials", {
+        email: username,
+        password: password,
+        redirect: false,
+      });
+      if (res?.error) {
+        setError("Invalid Credentials");
+        return;
+      }
+      if (res?.ok) {
+        // The authorize callback in [...nextauth] returns the user object.
+        // We need to parse the session to get the role and redirect.
+        // A simple way is to just reload and let next-auth handle session.
+        // A better way is to get session and redirect.
+        router.replace("/user-dashboard"); // Redirect to a common authenticated page
+      }
+    } catch (error) {
+      console.error("LOGIN_ERROR:", error);
+      setError("An error occurred during login.");
+    } finally {
+    }
   };
 
   return (
@@ -36,6 +67,7 @@ export default function LoginPage() {
             <h2 className="text-2xl sm:text-3xl font-bold text-center text-black mb-4">
               Login
             </h2>
+            {error && <div className="text-red-500 text-sm">{error}</div>}
 
             <input
               type="text"

@@ -1,7 +1,11 @@
+"use client";
 import Link from "next/link";
 import typewriter from "@/components/typewriter";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Home() {
+  const { data: session } = useSession();
+
   return (
     <main className=" bg-[#f5f6f2] text-center py-5 px-6">
       <section className="bg-[#a8c6d8] text-center py-10 px-6">
@@ -55,6 +59,19 @@ export default function Home() {
               care.
             </p>
           </div>
+
+          {/* <div>
+            <h1>{session?.user.role} Dashboard</h1>
+            {session && session.user ? (
+              <>
+                <p>Welcome, {session.user.name}!</p>
+                <p>roll, {session.user.role}</p>
+                <button onClick={() => signOut()}>Logout</button>
+              </>
+            ) : (
+              <p>Not logged in</p>
+            )}
+          </div> */}
 
           <div className="bg-white border border-[#E5E7EB] text-left rounded-xl p-6 shadow hover:shadow-lg transition">
             <img

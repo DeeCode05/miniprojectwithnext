@@ -3,12 +3,13 @@ import { Schema, Document } from "mongoose";
 
 export interface IUser extends Document {
   username: string;
+  role: "user" | "worker";
   email: string;
   password: string;
   createdAt: Date;
 }
 
-const userSchema = new Schema<IUser>({
+const userSchema = new Schema({
   username: {
     type: String,
     required: true,
@@ -22,7 +23,11 @@ const userSchema = new Schema<IUser>({
     type: String,
     required: true,
   },
-  
+  role: {
+    type: String,
+    enum: ["user", "worker"],
+    default: "user",
+  },
   createdAt: {
     type: Date,
     default: Date.now,
