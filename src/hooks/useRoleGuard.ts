@@ -1,29 +1,25 @@
 "use client";
 
-import { useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-type Role = "user" | "worker";
-
-export const useRoleGuard = (allowedRoles: Role[]) => {
+export function useRoleGuard(allowedRoles: string[]) {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const pathname = usePathname();
 
   useEffect(() => {
-    if (status === "loading") {
-      return; // Do nothing while loading
-    }
+    if (status === "loading") return;
 
-    if (status === "unauthenticated") {
+    // If user not logged in → redirect to login
+    if (!session) {
       router.push("/login");
       return;
     }
 
-    const userRole = session?.user?.role as Role;
-    if (!userRole || !allowedRoles.includes(userRole)) {
-      router.push("/"); // Redirect to home if role is not allowed
+    // If logged in but not allowed → redirect home
+    if (!allowedRoles.includes(session.user.role)) {
+      router.push("/");
     }
-  }, [session, status, router, allowedRoles, pathname]);
-};
+  }, [session, status, allowedRoles, router]);
+}

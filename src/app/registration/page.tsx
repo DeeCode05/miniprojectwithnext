@@ -72,11 +72,29 @@ const RegisterProfessional = () => {
     return validationErrors.length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // ✅ Updated handleSubmit that connects to backend
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Form data ready for backend:", formData);
-      alert("Registration successful! (Check console for data)");
+      try {
+        const res = await fetch("/api/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          alert("Worker registered successfully!");
+          console.log("Saved worker:", data);
+        } else {
+          alert(data.message || "Something went wrong");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Server error. Please try again.");
+      }
     } else {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }

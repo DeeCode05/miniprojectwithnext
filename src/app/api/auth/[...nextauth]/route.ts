@@ -66,8 +66,7 @@ const authOptions: NextAuthOptions = {
           name: user.name,
           email: user.email as string,
           role: (user as any).role,
-        };
-      }
+        }      }
       return token;
     },
 
